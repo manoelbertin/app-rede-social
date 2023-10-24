@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  mount_devise_token_auth_for 'User', at: 'auth'
+  devise_scope :user do
+    get "users", to: "devise/sessions#new"
+  end
+
+  devise_for :users
+
+  resources :posts
+
   # Defines the root path route ("/")
-  # root to: "home#index"
+  root "posts#index"
 end
